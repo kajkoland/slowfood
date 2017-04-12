@@ -12,12 +12,14 @@
 	.row
 		.col-md-6
 			#ingredients
-				%h2 Ingredients
-				%ul
-					- @recipe.ingredients.each do |ingredient|
-						%li= ingredient.name
+				- if current_user.admin?
+					%h2 Ingredients
+					%ul
+						- @recipe.ingredients.each do |ingredient|
+							%li= ingredient.name
 
-				= link_to "Send shopping list", root_path, class: "btn btn-default"				
+					= link_to "Send shopping list", root_path, class: "btn btn-default"	
+						
 		.col-md-6
 			#directions
 				%h2 Directions
