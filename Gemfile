@@ -46,6 +46,9 @@ gem 'devise', '~> 4.2', '>= 4.2.1'
 gem 'shareable', '~> 1.1', '>= 1.1.4'
 #share buttons
 
+#rating
+gem 'ratyrate', '~> 1.2.2.alpha'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
