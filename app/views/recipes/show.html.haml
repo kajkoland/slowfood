@@ -12,13 +12,12 @@
 	.row
 		.col-md-6
 			#ingredients
-				- if current_user.admin?
-					%h2 Ingredients
-					%ul
-						- @recipe.ingredients.each do |ingredient|
-							%li= ingredient.name
+				%h2 Ingredients
+				%ul
+					- @recipe.ingredients.each do |ingredient|
+						%li= ingredient.name
 
-					= link_to "Send shopping list", root_path, class: "btn btn-default"	
+				= link_to "Send shopping list", root_path, class: "btn btn-default"	
 						
 		.col-md-6
 			#directions
@@ -28,7 +27,27 @@
 						%li= direction.step
 
 				= link_to "Send Directions", root_path, class: "btn btn-default"
-				
+	.row
+		.col-md-6
+			#ingredients
+				%h2 Comments
+				%br
+				= @recipe.comments.count.to_s
+
+				%ul
+					- @recipe.comments.each do |comments|
+						%li= comments.body.to_s + ' by ' + comments.author.to_s
+				%h3 Add a Comment
+				= render "comments/form"
+
+
+
+
+							
+	
+
+
+
 	.row
 		.col-md-12
 			= link_to "Back", root_path, class: "btn btn-default"
