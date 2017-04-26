@@ -17,8 +17,8 @@
 					- @recipe.ingredients.each do |ingredient|
 						%li= ingredient.name
 
-				= link_to "Send shopping list", root_path, class: "btn btn-default"	
-						
+				= link_to "Send shopping list", root_path, class: "btn btn-default"
+
 		.col-md-6
 			#directions
 				%h2 Directions
@@ -37,32 +37,30 @@
 				%ul
 					- @recipe.comments.each do |comments|
 						%li= comments.body.to_s + ' by ' + comments.author.to_s
+						
+
 				%h3 Add a Comment
 				= render "comments/form"
 
 
 
 
-							
-	
+
+
 
 
 
 	.row
 		.col-md-12
 			= link_to "Back", root_path, class: "btn btn-default"
-			- if user_signed_in?
+			- if current_user == Recipe.find(params[:id]).user
 				= link_to "Edit", edit_recipe_path, class: "btn btn-default"
 				= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
 
-	
+
 		.col-md-12
 			= render_shareable :buttons=> ['twitter', 'facebook', 'pinterest']
 
 		%br
 		.col-md-12
 			= rating_for @recipe, 'quality', disable_after_rate: false
-
-
-
-

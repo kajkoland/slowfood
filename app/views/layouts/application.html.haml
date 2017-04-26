@@ -9,7 +9,11 @@
 %body
 	%nav.navbar.navbar-default
 		.container
-			.navbar-brand= link_to "Recipe Box", root_path
+			.navbar-brand= link_to "Slowfood", root_path
+
+			= form_tag recipes_path, :method => "get" do
+				= text_field_tag :search, params[:search]
+				= submit_tag "Search", :name => nil
 
 			
 

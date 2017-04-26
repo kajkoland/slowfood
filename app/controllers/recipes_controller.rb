@@ -1,7 +1,10 @@
 class RecipesController < ApplicationController
-	
+
 	before_action :find_recipe, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user!, except: [:index, :show]  
+	before_action :authenticate_user!, except: [:index, :show]
+	before_filter :require_permission, only: [:edit, :destroy]
+
+
 	def index
   	@recipes = Recipe.all
   	if params[:search]
@@ -26,7 +29,7 @@ class RecipesController < ApplicationController
 		else
 			render "new"
 		end
-	
+
 	end
 
 	def edit
@@ -46,17 +49,21 @@ class RecipesController < ApplicationController
 		redirect_to root_path, notice: "Deleted recipe"
 	end
 
-	private 
+	private
 
 	def recipe_params
 		params.require(:recipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :_destroy] , directions_attributes: [:id, :step, :_destroy])
 	end
+
 	def find_recipe
 		@recipe = Recipe.find(params[:id])
 	end
 
-
-
-
+	def require_permission
+  	if current_user != Recipe.find(params[:id]).user
+    	redirect_to root_path
+    #Or do something else here
+  	end
+	end
 
 end

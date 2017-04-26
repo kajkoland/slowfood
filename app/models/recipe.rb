@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
 	ratyrate_rateable "quality"
 
 	def self.search(search)
-  		where("title LIKE ? OR ingredients LIKE ? OR directions LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
+  		where("title LIKE ?", "%#{search}%")
 	end
 
 end
